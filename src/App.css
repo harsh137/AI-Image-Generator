@@ -1,0 +1,13 @@
+.App{
+    text-align: Center;
+    margin: auto ;
+}
+.Heading{
+    background-color: brown;
+    padding: 1rem;
+
+}
+.TextInput{
+    height: 30%;
+    width: 80%;
+}
