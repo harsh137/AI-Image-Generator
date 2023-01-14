@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import "./App.css";
+import "./loader.css"
 
 function App() {
- 
   
+
+     
+   
+    
+ 
+  const options = ["256x256", "512x512", "1024x1024"];
   const [text, setText] = useState("");
   const [url , setUrl]=useState("");
-  const [size, setSize]=useState("512x512")
+  const [size, setSize]=useState(options[0])
+  const [loading, setLoading] = useState(false);
   const [number , setNumber]=useState(1)
 
   const configuration = new Configuration({
@@ -17,16 +24,32 @@ function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
+      setLoading(true);
     const res=await openai.createImage({
       prompt: text,
       n: number,
       size: size,
     });
+    setLoading(false);
     setUrl(res.data.data[0].url);
   };
 
   return (
     <div className="App">
+      {loading ? (
+        <>
+           <div className="col-sm-2">
+                <div id="square4">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <h3 id="laoding_text">LOADING</h3>
+            </div>
+        </>
+      )
+      :(
       <>
       <div className="container-fluid Heading">
         <h2>Generate Any Image</h2>
@@ -48,22 +71,27 @@ function App() {
           </div>
 
           <div className="col col-lg-6">
-              <div class="dropdown">
-                <button class="btn btn-lg btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <ul class="dropdown-menu ">
-                  <li class="dropdown-item" value={"256x256"}>  Small</li>
-                  <li class="dropdown-item" value={"512x512"}>  Large</li>
-                  <li class="dropdown-item" value={"1024x1024"}>  Extra</li>
-                </ul>
-              </div>
+                    <form>
+                <select 
+                value={size} 
+                onChange={(e) => setSize(e.target.value)}>
+                  {options.map((value) => (
+                    <option value={value} key={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+                
+              </form>
         </div>
         </div>
         
         {url.length > 0 ? (<img className="result-image" src={url} alt="result"/>) : (<> </>)}
+      
       </>
+      )}
     </div>
   );
+                  
 };
 export default App;
