@@ -1,13 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+h2{
+    font-size: 7vw;
+}
 .App{
     text-align: Center;
     margin: auto ;
+    
+    font-weight: bold;
+    
 }
 .Heading{
-    background-color: brown;
-    padding: 1rem;
+    background-color:#F3EFE0;
+    padding: 1rem 0 1rem 0;
+    font-family: 'Great Vibes', cursive;
+    margin-bottom: 0;
+    height: 11vw;
 
 }
+
 .TextInput{
     height: 30%;
     width: 80%;
+
+}
+.TextColor{
+    color:whitesmoke;
+}
+.customSize{
+    height: 40px;
+    width: 40px;
+}
+.CarousalBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #141414;
+}
+.mainPhoto{
+    /* width: 256px;
+    height: 256px; */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.imgCarousel{
+    width: 120px;
+    height: 120px;
+    transition: 0.3s;
+}
+.imgCarousel:hover{
+    width: 130px;
+    height: 130px;
+    border: 2px solid white;
+    margin: 3px;
+}
+img{
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li{
+    display: inline;
+    padding-right: 5px;
+    
 }
